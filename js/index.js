@@ -25,6 +25,8 @@ function githubFormSubmit(e){
   clearSearch();
   let userList = document.querySelector("#user-list");
   let reposList = document.querySelector("#repos-list");
+  const usernameResultsHeader = document.querySelector("#usernameResultsHeader");
+  const reposResultsHeader = document.querySelector("#reposResultsHeader");
   e.preventDefault();
   // console.log("githubFormSubmit() function called");
   // console.log("e: ", e);
@@ -68,7 +70,7 @@ function githubFormSubmit(e){
           // console.log("avatar: ", avatar);
           // console.log("profileLink: ", profileLink);
 
-          usernameButton.innerText = `${username}`;
+          usernameButton.innerText = `${username} (Click For Repos)`;
           usernameButton.addEventListener("click", (e) => {
             // console.log("e: ", e);
             // console.log("typeof(e): ", typeof (e));
@@ -100,6 +102,8 @@ function githubFormSubmit(e){
 
                   // console.log("repoAnchor: " , repoAnchor);
                   // console.log("repoLi: ", repoLi);
+
+                  reposResultsHeader.textContent = "Repos Results:";
                   reposList.append(repoLi);
                 });
               });
@@ -112,6 +116,8 @@ function githubFormSubmit(e){
           profileLinkAnchor.href = `${profileLink}`;
           profileLinkAnchor.innerText = "Profile Link";
           profileLinkLi.append(profileLinkAnchor);
+
+          usernameResultsHeader.textContent = "Username Results:";
 
           userUlTag.append(usernameButton);
           userUlTag.append(avatarLi);
@@ -157,6 +163,7 @@ function githubFormSubmit(e){
 
           // console.log("repoAnchor: " , repoAnchor);
           // console.log("repoLi: ", repoLi);
+          reposResultsHeader.textContent = "Repos Results:";
           reposList.append(repoLi);
         });
       })
@@ -171,9 +178,13 @@ function clearSearch(e) {
   // console.log("e: ", e);
   userListUl = document.querySelector("#user-list");
   reposListUl = document.querySelector("#repos-list");
+  usernameResultsHeader = document.querySelector("#usernameResultsHeader");
+  reposResultsHeader = document.querySelector("#reposResultsHeader");
 
   userListUl.innerHTML = "";
   reposListUl.innerHTML = "";
+  usernameResultsHeader.innerHTML = "";
+  reposResultsHeader.innerHTML = "";
 }
 
 function switchContext(e) {
@@ -181,10 +192,10 @@ function switchContext(e) {
   let githubFormInput = document.querySelector("#github-form-submit");
   if (userOrRepoDecision === false) {
     githubFormInput.value = "Search Repo Name";
-    userOrRepoDecision = true
+    userOrRepoDecision = true;
   }
   else {
     githubFormInput.value = "Search Username";
-    userOrRepoDecision = false
+    userOrRepoDecision = false;
   }
 }
